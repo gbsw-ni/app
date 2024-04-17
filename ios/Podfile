@@ -27,6 +27,8 @@ end
 
 target 'capston' do
   config = use_native_modules!
+  pod 'RNSScreen', :path => '../node_modules/react-native-screens'
+  pod 'ReactNativeSvg', :path => '../node_modules/react-native-svg'
 
   use_react_native!(
     :path => config[:reactNativePath],
