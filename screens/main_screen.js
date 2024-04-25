@@ -161,7 +161,11 @@ function Main_Screen() {
             <Pressable style={{height: wp(53)}} onPress={handlePress}>
               <View
                 key={inside_item.RAND_MISSION_IN_id}
-                style={styles.mission_list}>
+                style={
+                  selectedMission === inside_item.RAND_MISSION_IN_id
+                    ? {width: wp(100)}
+                    : styles.mission_list
+                }>
                 <Image
                   source={inside_item.mission_image}
                   style={styles.mission_image}

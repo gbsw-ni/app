@@ -24,6 +24,7 @@ function Share_Goal_Screen() {
   const [textInputValue1, setTextInputValue1] = useState('');
   //목표설명
   const [textInputValue2, setTextInputValue2] = useState('');
+  const [textInputValue3, setTextInputValue3] = useState('');
   //이미지 선택
   const [imageUri, setImageUri] = useState(null);
 
@@ -39,6 +40,10 @@ function Share_Goal_Screen() {
 
   const handleTextInputChange2 = text => {
     setTextInputValue2(text); // 텍스트 입력값을 변경
+  };
+
+  const handleTextInputChange3 = text => {
+    setTextInputValue3(text); // 텍스트 입력값을 변경
   };
 
   const handleChooseImage = () => {
@@ -138,8 +143,8 @@ function Share_Goal_Screen() {
           <Text style={styles3.textInput_title}>공유 목표 이름</Text>
           <TextInput
             style={[styles3.textInput_style, {height: wp(10)}]}
-            value={textInputValue1}
-            onChangeText={handleTextInputChange1}
+            value={textInputValue2}
+            onChangeText={handleTextInputChange2}
             placeholder="목표 이름을 작성해주세요!"
           />
         </View>
@@ -147,8 +152,8 @@ function Share_Goal_Screen() {
           <Text style={styles3.textInput_title}>공유 목표 설명</Text>
           <TextInput
             style={[styles3.textInput_style, {height: wp(23)}]}
-            value={textInputValue2}
-            onChangeText={handleTextInputChange2}
+            value={textInputValue3}
+            onChangeText={handleTextInputChange3}
             placeholder="목표에 대해 상세하게 작성해주세요!"
           />
         </View>

@@ -201,7 +201,7 @@ function Create_Goal_Screen() {
           </Text>
         </Pressable>
       </View>
-      <Text style={{fontSize: hp(1.3), marginTop: wp(5), marginLeft: wp(16)}}>
+      <Text style={{fontSize: hp(1.3), marginTop: hp(50), marginLeft: wp(16)}}>
         가이드 위반이 되는 목표 작성 시 별도의 제재를 받을 수 있습니다.
       </Text>
     </SafeAreaView>
