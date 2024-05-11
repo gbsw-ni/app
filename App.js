@@ -22,7 +22,18 @@ const RAND_MISSION_IN = [
     mission_name: '이불 개기',
     mission_expla: '이불을 개며 하루를 다르게 시작해보세요!',
   },
-  // 다른 랜덤 미션들...
+  {
+    RAND_MISSION_IN_id: 2,
+    mission_image: require('../images/random_mission2.jpeg'),
+    mission_name: '스트레칭 하기',
+    mission_expla: '스트레칭을 통해 긴장된 근육을 풀어 질 좋은 하루를 느껴보세요!',
+  },
+  {
+    RAND_MISSION_IN_id: 3,
+    mission_image: require('../images/random_mission3.jpeg'),
+    mission_name: '창문 열기',
+    mission_expla: '창문을 열어서 상쾌한 공기를 느껴보세요!',
+  },
 ];
 
 const RAND_MISSION_OUT = [
@@ -33,7 +44,12 @@ const RAND_MISSION_OUT = [
     mission_expla:
       '가까운 편의점으로 가서 상쾌한 공기와 맛있는 음식들을 맛보세요!',
   },
-  // 다른 랜덤 미션들...
+  {
+    RAND_MISSION_OUT_id: 2,
+    mission_image: require('../images/random_mission5.jpeg'),
+    mission_name: '0km 걷기',
+    mission_expla: '0km를 걸어보며 건강이 좋아지는 기분과 상쾌함을 느껴보세요!',
+  },
 ];
 
 const USER_MISSION = [
@@ -43,7 +59,42 @@ const USER_MISSION = [
     mission_name: RAND_MISSION_IN[0].mission_name,
     mission_success: 0,
   },
-  // 다른 유저 미션들...
+  {
+    USER_MISSION_id: 2,
+    mission_image: RAND_MISSION_OUT[0].mission_image,
+    mission_name: RAND_MISSION_OUT[0].mission_name,
+    mission_success: 0,
+  },
+  {
+    USER_MISSION_id: 3,
+    mission_image: RAND_MISSION_IN[0].mission_image,
+    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_success: 0,
+  },
+  {
+    USER_MISSION_id: 4,
+    mission_image: RAND_MISSION_IN[0].mission_image,
+    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_success: 0,
+  },
+  {
+    USER_MISSION_id: 5,
+    mission_image: RAND_MISSION_IN[0].mission_image,
+    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_success: 0,
+  },
+  {
+    USER_MISSION_id: 6,
+    mission_image: RAND_MISSION_IN[0].mission_image,
+    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_success: 0,
+  },
+  {
+    USER_MISSION_id: 7,
+    mission_image: RAND_MISSION_IN[0].mission_image,
+    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_success: 0,
+  },
 ];
 
 const graph_status = -1;
