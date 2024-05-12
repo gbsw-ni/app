@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,12 @@ import {
   ScrollView,
   Pressable,
   Image,
+  Dimensions,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { LineChart } from 'react-native-chart-kit';
-import { Dimensions } from 'react-native';
 
 const RAND_MISSION_IN = [
   {
@@ -24,13 +23,13 @@ const RAND_MISSION_IN = [
   },
   {
     RAND_MISSION_IN_id: 2,
-    mission_image: require('../images/random_mission2.jpeg'),
+    mission_image: require('./images/random_mission2.jpeg'),
     mission_name: '스트레칭 하기',
     mission_expla: '스트레칭을 통해 긴장된 근육을 풀어 질 좋은 하루를 느껴보세요!',
   },
   {
     RAND_MISSION_IN_id: 3,
-    mission_image: require('../images/random_mission3.jpeg'),
+    mission_image: require('./images/random_mission3.jpeg'),
     mission_name: '창문 열기',
     mission_expla: '창문을 열어서 상쾌한 공기를 느껴보세요!',
   },
@@ -41,12 +40,11 @@ const RAND_MISSION_OUT = [
     RAND_MISSION_OUT_id: 1,
     mission_image: require('./images/random_mission4.jpeg'),
     mission_name: '편의점으로 외출하기',
-    mission_expla:
-      '가까운 편의점으로 가서 상쾌한 공기와 맛있는 음식들을 맛보세요!',
+    mission_expla: '가까운 편의점으로 가서 상쾌한 공기와 맛있는 음식들을 맛보세요!',
   },
   {
     RAND_MISSION_OUT_id: 2,
-    mission_image: require('../images/random_mission5.jpeg'),
+    mission_image: require('./images/random_mission5.jpeg'),
     mission_name: '0km 걷기',
     mission_expla: '0km를 걸어보며 건강이 좋아지는 기분과 상쾌함을 느껴보세요!',
   },
@@ -68,166 +66,173 @@ const USER_MISSION = [
   {
     USER_MISSION_id: 3,
     mission_image: RAND_MISSION_IN[0].mission_image,
-    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_name: '특정길이이상이면..',
     mission_success: 0,
   },
   {
     USER_MISSION_id: 4,
     mission_image: RAND_MISSION_IN[0].mission_image,
-    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_name: '특정길이이상이면..',
     mission_success: 0,
   },
   {
     USER_MISSION_id: 5,
     mission_image: RAND_MISSION_IN[0].mission_image,
-    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_name: '특정길이이상이면..',
     mission_success: 0,
   },
   {
     USER_MISSION_id: 6,
     mission_image: RAND_MISSION_IN[0].mission_image,
-    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_name: '특정길이이상이면..',
     mission_success: 0,
   },
   {
     USER_MISSION_id: 7,
     mission_image: RAND_MISSION_IN[0].mission_image,
-    mission_name: '특정길이이상이면 말줄임표가나온다',
+    mission_name: '특정길이이상이면..',
     mission_success: 0,
   },
 ];
 
-const graph_status = -1;
+const data = [20, 45, 28, 80, 99, 43]; // 예시 데이터
+const GRAPH_MARGIN = 20;
+const GRAPH_HEIGHT = 220;
 
-const chartConfig = {
-  backgroundGradientFrom: '#ffffff',
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: '#ffffff',
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(0, 102, 255, ${opacity})`,
-  strokeWidth: 2,
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false,
-  decimalPlaces: 0,
-};
+const Chart_Goal_Screen = () => {
+  const [dimensions, setDimensions] = useState(Dimensions.get('window'));
 
-function Chart_Goal_Screen() {
-  const [dimensions, setDimensions] = useState({
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener("change", ({ window }) => {
+      setDimensions(window);
+    });
+    return () => subscription.remove();
+  }, []);
+
+  const scaleX = (dimensions.width - GRAPH_MARGIN * 2) / (data.length - 1);
+  const scaleY = Math.max(...data);
+
+  const points = data.map((point, index) => {
+    const x = index * scaleX + GRAPH_MARGIN;
+    const y = GRAPH_HEIGHT - (point / scaleY) * GRAPH_HEIGHT;
+    return { x, y };
   });
 
   return (
-    <SafeAreaView>
-      <Text
-        style={{
-          fontSize: hp(2.9),
-          color: 'black',
-          fontWeight: 'bold',
-          marginTop: wp(20),
-          alignSelf: 'center',
-        }}>
-        차트로 보는 나의 목표성과 그래프
-      </Text>
-      <LineChart
-        data={{
-          labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'June'],
-          datasets: [
-            {
-              data: [Math.random()],
-            },
-          ],
-        }}
-        width={dimensions.width}
-        height={220}
-        chartConfig={chartConfig}
-      />
-      <Text
-        style={{
-          fontSize: hp(2.4),
-          color: 'black',
-          fontWeight: 'bold',
-          marginTop: wp(70),
-          marginLeft: wp(35),
-        }}>
-        그래프가{' '}
-        {graph_status < 0 ? (
-          <Text style={{ color: '#0066ff' }}>하락</Text>
-        ) : (
-          <Text style={{ color: '#0066ff' }}>상승</Text>
-        )}
-        하고 있어요!
-      </Text>
-      <Text
-        style={{
-          fontSize: hp(2.4),
-          color: 'black',
-          fontWeight: 'bold',
-          marginLeft: wp(53.2),
-        }}>
-        조금만 더 열심히!
-      </Text>
-      <Text
-        style={{
-          fontSize: hp(1.8),
-          color: 'black',
-          marginLeft: wp(6),
-          marginTop: wp(8),
-          marginBottom: wp(2),
-          fontWeight: 'bold',
-        }}>
-        <Text style={{ color: '#0066ff' }}>
-          그래프 {graph_status < 0 ? <Text>상승</Text> : <Text>하락</Text>}
-        </Text>
-        을 위한 솔루션을 추천해드릴게요!
-      </Text>
-      <ScrollView horizontal style={{ height: wp(57) }}>
-        {USER_MISSION.map((inside_item, index) => (
-          <Pressable key={index} style={{ height: wp(53) }}>
-            <View style={styles.mission_list}>
-              <Image
-                source={inside_item.mission_image}
-                style={styles.mission_image}
-              />
-              <Text
-                style={[styles.mission_name, { width: wp(45) }]}
-                numberOfLines={1}
-                ellipsizeMode="tail">
-                {inside_item.mission_name}
-              </Text>
-            </View>
-          </Pressable>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>차트로 보는 나의 목표성과 그래프</Text>
+      <View style={[styles.graphContainer, { width: dimensions.width }]}>
+        {points.map((point, index) => (
+          <View key={index} style={[styles.point, { left: point.x, top: point.y }]} />
+        ))}
+        {points.slice(1).map((point, index, arr) => (
+          <View key={index} style={{
+            position: 'absolute',
+            left: arr[index].x,
+            width: point.x - arr[index].x,
+            top: arr[index].y,
+            height: 1,
+            backgroundColor: 'blue',
+          }} />
+        ))}
+      </View>
+    <Text style={styles.label}>
+          그래프가 {data[data.length - 1] < data[data.length - 2] ? 
+      <Text style={{color: '#0066FF'}}>하락</Text> : 
+      <Text style={{color: '#0066FF'}}>상승</Text>}하고 있어요!
+    </Text>
+      <Text style={styles.solutionText}>그래프 상승을 위한 솔루션을 추천해드릴게요!</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.missionScroll}>
+        {USER_MISSION.map((mission, index) => (
+          <View key={index} style={styles.missionCard}>
+            <Image source={mission.mission_image} style={styles.missionImage} />
+            <Text style={styles.missionText}>{mission.mission_name}</Text>
+          </View>
         ))}
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  mission_list: {
-    backgroundColor: 'white',
+  container: {
     flex: 1,
-    marginHorizontal: wp(3),
-    marginTop: wp(2),
-    shadowColor: 'black',
-    shadowOpacity: 0.15,
-    padding: wp(3),
-    borderRadius: wp(4),
-    elevation: 8,
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: wp(5),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  mission_name: {
-    flex: 1,
-    fontSize: hp(2.3),
+  graphContainer: {
+    height: GRAPH_HEIGHT,
+    backgroundColor: '#f9f9f9',
+    marginVertical: hp(2),
+    borderColor: '#0029FF',
+    borderWidth: 1,
+    marginTop: hp(5),
+    borderRadius: 10,
+    width:250,
+  },
+  title: {
+    fontSize: hp(2.9),
     color: 'black',
+    fontWeight: 'bold',
+    marginTop: wp(20),
+    alignSelf: 'center',
   },
-  mission_image: {
-    width: wp(52),
-    height: wp(35),
-    marginBottom: wp(2),
-    borderRadius: wp(5),
+  label: {
+    fontSize: hp(3),
+    color: 'black',
+    fontWeight: 'bold',
+    marginTop: wp(5),
+    marginLeft:95,
+  },
+  point: {
+    position: 'absolute',
+    width: 5,
+    height: 5,
+    backgroundColor: 'blue',
+    borderRadius: 5 / 2,
+  },
+  line: {
+    position: 'absolute',
+    height: 1,
+    backgroundColor: 'blue',
+  },
+  missionScroll: {
+    width: '100%',
+    height: 100,
+    marginTop: 20,
+  },
+  missionCard: {
+    width: 240,
+    height: 185,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    marginRight: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  missionImage: {
+    width: 220,
+    height: 130,
+    borderRadius: 20,
+  },
+  missionText: {
+    fontSize: 17,
+    color: '#333',
+    marginTop:8,
+    marginRight:80,
+    fontWeight:'900',
+  },
+  solutionText: {
+    fontSize: hp(2),
+    color: 'black',
+    fontWeight: 'bold',
+    marginTop: hp(3),
+    marginBottom: hp(1),
+    marginLeft:70,
   },
 });
-
 export default Chart_Goal_Screen;
