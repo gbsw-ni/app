@@ -1,38 +1,42 @@
-import { TouchableOpacity, Image, StyleSheet, View, Text } from 'react-native';
+import { useState } from 'react';
+import { TextInput, TouchableOpacity, Text, View, StyleSheet, Keyboard } from 'react-native';
 
-const check = require('./icons/check.png');
+const DiaryMemo = ({ navigation }) => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [rating, setRating] = useState(0);
 
-const Diary = ({ navigation }) => {
+  const changeRating = (newRating) => {
+    setRating(newRating);
+  };
+
+  const clickSave = () => {
+    console.log('내용:', content);
+    console.log('별점:', rating);
+    // 저장 로직을 구현해야됨. , 서버에 데이터를 보내거나 로컬 스토리지에 저장.
+    Keyboard.dismiss();
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('PreviousDate')}>
-          <Image source={require('./icons/right-arrow.png')} style={styles.navIcon} />
-        </TouchableOpacity>
-        <Text style={styles.dateText}>4월</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('NextDate')}>
-          <Image source={require('./icons/left-arrow.png')} style={styles.navIcon} />
-        </TouchableOpacity>
+      <Text style={styles.header}>diary</Text>
+      <TextInput
+        style={styles.inputContent}
+        onChangeText={setContent}
+        value={content}
+        multiline={true}
+        placeholder="오늘 하루의 일기를 작성해 주세요!"
+      />
+      <Text style={styles.textCounter}>{content.length}/300</Text>
+      <View style={styles.stars}>
+        {[1, 2, 3, 4, 5].map((index) => (
+          <TouchableOpacity key={index} onPress={() => changeRating(index)}>
+            <Text style={index <= rating ? styles.starFilled : styles.starEmpty}>★</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.checkBox}>
-          <Image style={styles.check1} source={check} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.checkBox}>
-          <Image style={styles.check1} source={check} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.checkBox}>
-          <Image style={styles.check1} source={check} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.checkBox}>
-          <Image style={styles.check1} source={check} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.centeredTextContainer}>
-        <Text style={styles.MainText}>클릭 시 그날의 일기가 확인 됩니다!</Text>
-      </View>
-      <TouchableOpacity style={styles.actionButton}>
-        <Image source={require('./icons/pen_icon.png')} style={styles.actionIcon} />
+      <TouchableOpacity style={styles.saveButton} onPress={clickSave}>
+        <Text style={styles.saveButtonText}>작성 완료</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,74 +44,60 @@ const Diary = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'space-between', // 컨테이너 내의 요소들을 위, 중간, 아래로 분리
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    paddingTop: 20,
-    paddingBottom: 5,
-    marginTop:20,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    paddingHorizontal: 20,
-  },
-  navIcon: {
-    width: 30,
-    height: 30,
-  },
-  dateText: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-  },
-  MainText: {
-    fontSize: 21,
     textAlign: 'center',
-    fontWeight: '900',
-    color: '#CCCCCC',
+    color: 'black',
+    marginTop: 20,
+    marginBottom: -30, // 헤더와 입력칸 사이의 간격 확대
   },
-  buttonContainer: {
+  inputContent: {
+    height: 400,
+    width: '100%', // 화면 너비에 맞춰 조정
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 17,
+    padding: 10,
+    textAlignVertical: 'top',
+    marginBottom: -20, // 입력칸과 별점 사이의 간격 확대
+  },
+  textCounter: {
+    color: 'gray',
+    marginBottom: -20, // 카운터와 별점 사이의 간격 확대
+  },
+  stars: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 30,
+    marginRight:100,
+    justifyContent: 'center',
+    marginBottom: -40, // 별점과 버튼 사이의 간격 확대
   },
-  checkBox: {
-    width: 79,
-    height: 80,
-    marginTop: 70,
+  starFilled: {
+    fontSize: 50,
+    color: '#0066FF'
+  },
+  starEmpty: {
+    fontSize: 50,
+    color: 'lightgray'
+  },
+  saveButton: {
     backgroundColor: '#0066FF',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 6,
+    borderRadius: 20,
+    padding: 10,
+    width: 150,
+    alignItems:'center',
+    marginLeft:200,
   },
-  check1: {
-    width: 65,
-    height: 55,
-  },
-  centeredTextContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
-  actionButton: {
-    position: 'absolute',
-    bottom: 20,
-    backgroundColor: '#0066FF',
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  actionIcon: {
-    width: 30,
-    height: 30,
-  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 16
+  }
 });
 
-export default Diary;
+
+export default DiaryMemo;
