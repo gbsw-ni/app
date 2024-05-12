@@ -1,41 +1,67 @@
 import { TouchableOpacity, Image, StyleSheet, View, Text } from 'react-native';
 
-// 이미지를 직접 require로 가져옵니다.
 const check = require('./icons/check.png');
 
-const Diary = ({navigation}) => {
+const Diary = ({ navigation }) => {
   return (
-    <View style={styles5.container}>
-      <View style={styles5.header}></View>
-      <View style={styles5.buttonContainer}>
-        <TouchableOpacity style={styles5.checkBox}>
-          <Image style={styles5.check1} source={check} />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('PreviousDate')}>
+          <Image source={require('./icons/right-arrow.png')} style={styles.navIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles5.checkBox}>
-          <Image style={styles5.check1} source={check} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles5.checkBox}>
-          <Image style={styles5.check1} source={check} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles5.checkBox}>
-          <Image style={styles5.check1} source={check} />
+        <Text style={styles.dateText}>4월</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('NextDate')}>
+          <Image source={require('./icons/left-arrow.png')} style={styles.navIcon} />
         </TouchableOpacity>
       </View>
-      <View style={styles5.centeredTextContainer}>
-        <Text style={styles5.MainText}>클릭 시 그날의 일기가 확인 됩니다!</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.checkBox}>
+          <Image style={styles.check1} source={check} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.checkBox}>
+          <Image style={styles.check1} source={check} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.checkBox}>
+          <Image style={styles.check1} source={check} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.checkBox}>
+          <Image style={styles.check1} source={check} />
+        </TouchableOpacity>
       </View>
+      <View style={styles.centeredTextContainer}>
+        <Text style={styles.MainText}>클릭 시 그날의 일기가 확인 됩니다!</Text>
+      </View>
+      <TouchableOpacity style={styles.actionButton}>
+        <Image source={require('./icons/pen_icon.png')} style={styles.actionIcon} />
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles5 = StyleSheet.create({
-  header:{
-    borderBottomColor:'black',
-    marginTop: 20,
-  },
+const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: 20,
+    paddingBottom: 5,
+    marginTop:20,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    paddingHorizontal: 20,
+  },
+  navIcon: {
+    width: 30,
+    height: 30,
+  },
+  dateText: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   MainText: {
     fontSize: 21,
@@ -67,6 +93,20 @@ const styles5 = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+  },
+  actionButton: {
+    position: 'absolute',
+    bottom: 20,
+    backgroundColor: '#0066FF',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionIcon: {
+    width: 30,
+    height: 30,
   },
 });
 
