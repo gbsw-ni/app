@@ -78,7 +78,7 @@ function Create_Goal_Screen() {
           margin: wp(6),
           marginLeft: wp(8),
         }}>
-        <Image source={require('../icons/back_icon.png')} />
+        <Image source={require('./icons/back_icon.png')} />
       </Pressable>
       <Text
         style={{
@@ -160,7 +160,7 @@ function Create_Goal_Screen() {
           <View style={{marginLeft: wp(8), marginTop: wp(4)}}>
             <Text style={{fontSize: hp(1.2), marginLeft: wp(2)}}>click!</Text>
             <Image
-              source={require('../icons/image_icon.png')}
+              source={require('./icons/image_icon.png')}
               style={{width: wp(10), height: wp(10)}}
             />
           </View>
