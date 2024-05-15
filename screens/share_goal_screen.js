@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
@@ -16,42 +15,36 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 function Share_Goal_Screen() {
-  //선택 관리
+  
   const [selectedOption, setSelectedOption] = useState(null);
-  const options = ['inside', 'outside']; //라이브 버튼
+  const options = ['inside', 'outside']; 
 
-  //목표이름
   const [textInputValue1, setTextInputValue1] = useState('');
-  //목표설명
   const [textInputValue2, setTextInputValue2] = useState('');
-  //이미지 선택
   const [imageUri, setImageUri] = useState(null);
 
   const handleSelectOption = option => {
-    setSelectedOption(option); //선택했을 때 선택 옵션 변경
+    setSelectedOption(option); 
     console.log(selectedOption);
   };
 
-  //입력값 변경 될 때
   const handleTextInputChange1 = text => {
-    setTextInputValue1(text); // 텍스트 입력값을 변경
+    setTextInputValue1(text);
   };
 
   const handleTextInputChange2 = text => {
-    setTextInputValue2(text); // 텍스트 입력값을 변경
+    setTextInputValue2(text); 
   };
 
   const handleChooseImage = () => {
-    // eslint-disable-next-line no-shadow
     const options = {
       title: '이미지 선택',
       storageOptions: {
-        skipBackup: true, //백업을 건너뜀
-        path: 'images', //해당 폴덩에 이미지 저장
+        skipBackup: true, 
+        path: 'images', 
       },
     };
 
-    //이미지 선택기 열기
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
         console.log('이미지 선택이 취소되었습니다.');
