@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
-    justifyContent: 'space-between', // 컨테이너 내의 요소들을 위, 중간, 아래로 분리
+    justifyContent: 'space-between', 
   },
   header: {
     fontSize: 24,
@@ -55,27 +55,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
     marginTop: 20,
-    marginBottom: -30, // 헤더와 입력칸 사이의 간격 확대
+    marginBottom: -30, 
   },
   inputContent: {
     height: 400,
-    width: '100%', // 화면 너비에 맞춰 조정
+    width: '100%', 
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 17,
     padding: 10,
     textAlignVertical: 'top',
-    marginBottom: -20, // 입력칸과 별점 사이의 간격 확대
+    marginBottom: -20, 
   },
   textCounter: {
     color: 'gray',
-    marginBottom: -20, // 카운터와 별점 사이의 간격 확대
+    marginBottom: -20, 
   },
   stars: {
     flexDirection: 'row',
     marginRight:100,
     justifyContent: 'center',
-    marginBottom: -40, // 별점과 버튼 사이의 간격 확대
+    marginBottom: -40, 
   },
   starFilled: {
     fontSize: 50,
