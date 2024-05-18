@@ -1,11 +1,13 @@
     import React from 'react';
     import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-    const WelcomeScreen = ({ navigation }) => {
+    const Start = ({ navigation }) => {
     return (
         <View style={styles.container}>
-        <Text style={styles.headerText}>더 나은 내일을 위한</Text>
-        <Text style={styles.brandText}>Naeil</Text>
+        <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>더 나은 내일을 위한</Text>
+            <Text style={styles.brandText}>Naeil</Text>
+        </View>
         <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Signup')}
@@ -18,23 +20,28 @@
 
     const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#0066FF',
+        flex: 1,
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+    },
+    headerContainer: {
+        alignItems: 'center',
+        marginTop: 100, 
     },
     headerText: {
         color: 'white',
         fontSize: 24,
-        marginBottom: 8,
+        marginLeft: 100,
+        marginBottom: 10,
     },
     brandText: {
         color: 'white',
         fontSize: 48,
+        marginLeft:180,
         fontWeight: 'bold',
     },
     button: {
-        marginTop: 40,
         backgroundColor: 'white',
         borderRadius: 30,
         paddingVertical: 15,
@@ -44,12 +51,17 @@
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 8,
+        marginBottom: 50, 
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     buttonText: {
         color: '#0066FF',
-        fontSize: 18,
+        fontSize: 20,
+        width: 150,
         fontWeight: 'bold',
+        textAlign: 'center' // Center the text
     },
     });
 
-    export default WelcomeScreen;
+    export default Start;
