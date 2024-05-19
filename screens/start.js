@@ -1,22 +1,22 @@
     import React from 'react';
     import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-    const Start = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-        <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>더 나은 내일을 위한</Text>
-            <Text style={styles.brandText}>Naeil</Text>
-        </View>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Signup')}
-        >
-            <Text style={styles.buttonText}>Let's go!</Text>
-        </TouchableOpacity>
-        </View>
-    );
-    };
+        const Start = ({ navigation }) => {
+            return (
+            <View style={styles.container}>
+                <View style={styles.headerContainer}>
+                <Text style={styles.headerText}>더 나은 내일을 위한</Text>
+                <Text style={styles.brandText}>Naeil</Text>
+                </View>
+                <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('LoginAndSignupScreen')}
+                >
+                <Text style={styles.buttonText}>Let's go!</Text>
+                </TouchableOpacity>
+            </View>
+            );
+        };
 
     const styles = StyleSheet.create({
     container: {
