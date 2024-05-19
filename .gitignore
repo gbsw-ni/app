@@ -73,9 +73,7 @@ yarn-error.log
 !.yarn/versions
 
 # node_modules should be tracked for Yarn Zero-Install
-# However, if you have any local node_modules directories that should not be tracked, specify them here
-# For example, if you have node_modules inside subdirectories that should be ignored, specify them
-# /path/to/subdirectory/node_modules/
+node_modules/
 
 # Ignore the entire .pnp directory
 .pnp
@@ -86,4 +84,3 @@ yarn-error.log
 # Ignore yarn.lock files from other package managers if not using them
 # yarn.lock
 package-lock.json
-node_modules
