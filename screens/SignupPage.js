@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-undef */
 import React from 'react';
 import {View, Text} from 'react-native';
 import {StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';

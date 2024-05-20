@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 const logo = require('../icons/logo1.png');
